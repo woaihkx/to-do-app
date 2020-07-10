@@ -29,7 +29,18 @@ function onReady() {
     // empty the input
     newToDoText.value = "";
 
+    let button = document.createElement("button");
+    let textNode = document.createTextNode("Delete");
+    button.appendChild(textNode);
+    // button.className = "mdl-button mdl-js-button mdl-button--raised mdl-button--accent";
+    toDoList.appendChild(button);
+
+    button.addEventListener("click", event => {
+        toDoList.parentNode.removeChild(toDoList);
+    });
+
   });
+
 }
 
 window.onload = function() {
