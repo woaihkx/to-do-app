@@ -7,6 +7,10 @@ function onReady() {
 
     // get the text
     let title = newToDoText.value;
+    if (title.length == 0) {
+      return false;
+    }
+
 
     // create a new li
     let newLi = document.createElement("Li");
@@ -16,9 +20,11 @@ function onReady() {
 
     // set the input's type to checkbox
     checkbox.type = "checkbox";
+    checkbox.setAttribute("style", "transform: scale(1.5); position: relative; left: 12px");
 
     // set the title
     newLi.textContent = title;
+    newLi.setAttribute("style", "font-size: 1.4em; font-weight: 400px");
 
     //attach the checkbox to the li
     newLi.appendChild(checkbox);
@@ -30,13 +36,19 @@ function onReady() {
     newToDoText.value = "";
 
     let button = document.createElement("button");
+    button.style.backgroundColor = "#2A9988";
+    button.style.color = "white";
+    button.style.position = "absolute";
+    button.style.left = "350px";
+    button.style.textAlign = "center";
+    button.style.height = "22px";
     let textNode = document.createTextNode("Delete");
     button.appendChild(textNode);
     // button.className = "mdl-button mdl-js-button mdl-button--raised mdl-button--accent";
-    toDoList.appendChild(button);
+    newLi.appendChild(button);
 
     button.addEventListener("click", event => {
-        toDoList.parentNode.removeChild(toDoList);
+        newLi.parentNode.removeChild(newLi);
     });
 
   });

@@ -1,0 +1,59 @@
+body {
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu;
+  font: Arial, Helvetica, sans-serif;
+  background-color: #E1F0D8;
+}
+
+header {
+  background: url("../images/hero.jpg") center / cover;
+  height: 30vh;
+  justify-content: center;
+  text-align: center;
+}
+
+main {
+  margin-top: auto;
+  width: 90%;
+  max-width: 900px;
+}
+
+h1 {
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.form {
+  padding: 30px;
+  height: 100px;
+}
+
+.label {
+   display: inline;
+   font-size: 20px;
+   font-weight: 500;
+}
+
+.box {
+   width: 220px;
+   height: 26px;
+   border: 1.25px solid black;
+   position: relative;
+   left: 15px;
+}
+
+.submitbutton {
+  font-size: 18px;
+  font-weight: 500;
+  padding: 8px;
+  color: white;
+  border-radius: 5px;
+  background-color: #2A9988;
+  border: 2px solid #2A9988;
+  position: absolute;
+  left: 30px;
+  top: 80px;
+}
+
+.list {
+  overflow: hidden;
+}
