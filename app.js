@@ -1,6 +1,12 @@
 function onReady() {
   let toDos = [];
-  let id = 0;
+  loadFromStorage();
+
+  // TODO use ID rigorous uuid Node.js package
+  // console.log("Time stamp " + Date.now());
+  // import { v4 as uuidv4 } from 'uuid';
+
+  let myStorage = window.localStorage;
   const addToDoForm = document.getElementById("addToDoForm");
   function createNewToDo() {
     const newToDoText = document.getElementById("newToDoText");
@@ -8,11 +14,22 @@ function onReady() {
     toDos.push({
       title: newToDoText.value,
       complete: false,
-      id: id
+      id: Date.now()
     });
-    id += 1;
+    myStorage.setItem("toDos", JSON.stringify(toDos));
+    // id += 1;  // this is a bad idea for dynamic changes
     newToDoText.value = "";
     renderTheUI();
+  }
+
+  function loadFromStorage() {
+    let myStorage = window.localStorage;
+    var toDosString = myStorage.getItem("toDos");
+    if (toDosString != null) {
+      toDos = JSON.parse(toDosString);
+    }
+    console.log("Loaded to-dos array from storage");
+    console.table(toDos);
   }
 
   function renderTheUI() {
@@ -22,6 +39,15 @@ function onReady() {
       const newLi = document.createElement("li");
       const checkbox = document.createElement("input");
       checkbox.type = "checkbox";
+      checkbox.checked = toDo.complete;
+      checkbox.addEventListener("change", function() {
+        if(this.checked) {
+          toDo.complete = true;
+        } else {
+          toDo.complete = false;
+        }
+        myStorage.setItem("toDos", JSON.stringify(toDos));
+      })
       newLi.textContent = toDo.title;
       toDoList.appendChild(newLi);
       newLi.appendChild(checkbox);
@@ -31,8 +57,9 @@ function onReady() {
       button.appendChild(textNode);
       newLi.appendChild(button);
       button.addEventListener("click", event => {
-        //delete toDos[toDo.id];
+        //delete toDos[toDo.id];  // caution id may not equal index
         toDos = toDos.filter(eachToDo => eachToDo.id != toDo.id);
+        myStorage.setItem("toDos", JSON.stringify(toDos));
         newLi.parentNode.removeChild(newLi);
         renderTheUI();
       });
@@ -49,6 +76,5 @@ function onReady() {
 }
 
 window.onload = function() {
-
   onReady();
 };
